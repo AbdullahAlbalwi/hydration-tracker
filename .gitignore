@@ -10,6 +10,11 @@ functions/lib/
 functions/.env
 *.env.local
 
+# Generated code (run `dart run build_runner build`)
+*.freezed.dart
+*.g.dart
+*.config.dart
+
 # Miscellaneous
 *.class
 *.log
