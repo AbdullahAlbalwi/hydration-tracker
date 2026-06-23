@@ -11,6 +11,7 @@ import 'package:hydration_tracker/feature/hydration/data/datasources/hydration_r
 import 'package:hydration_tracker/feature/hydration/data/repositories/hydration_repository_impl.dart';
 import 'package:hydration_tracker/feature/hydration/domain/repositories/hydration_repository.dart';
 import 'package:hydration_tracker/feature/hydration/presentation/cubit/home_cubit.dart';
+import 'package:hydration_tracker/feature/hydration/presentation/cubit/insights_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -44,5 +45,6 @@ Future<void> setupDependencies() async {
     ..registerLazySingleton<HydrationRepository>(
       () => HydrationRepositoryImpl(getIt()),
     )
-    ..registerFactory<HomeCubit>(() => HomeCubit(getIt()));
+    ..registerFactory<HomeCubit>(() => HomeCubit(getIt()))
+    ..registerFactory<InsightsCubit>(() => InsightsCubit(getIt()));
 }

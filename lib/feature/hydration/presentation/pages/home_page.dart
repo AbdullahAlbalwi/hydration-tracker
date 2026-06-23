@@ -7,6 +7,7 @@ import 'package:hydration_tracker/feature/hydration/domain/entities/daily_summar
 import 'package:hydration_tracker/feature/hydration/domain/entities/water_log.dart';
 import 'package:hydration_tracker/feature/hydration/presentation/cubit/home_cubit.dart';
 import 'package:hydration_tracker/feature/hydration/presentation/cubit/home_state.dart';
+import 'package:hydration_tracker/feature/hydration/presentation/pages/insights_page.dart';
 import 'package:hydration_tracker/feature/hydration/presentation/widgets/day_selector.dart';
 import 'package:hydration_tracker/feature/hydration/presentation/widgets/quick_add_bar.dart';
 import 'package:hydration_tracker/feature/hydration/presentation/widgets/water_log_tile.dart';
@@ -41,6 +42,13 @@ class _HomeView extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
         actions: [
+          IconButton(
+            tooltip: 'This week',
+            icon: const Icon(Icons.insights_outlined, color: Colors.white),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(builder: (_) => const InsightsPage()),
+            ),
+          ),
           IconButton(
             tooltip: 'Sign out',
             icon: const Icon(Icons.logout, color: Colors.white),
