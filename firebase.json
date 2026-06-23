@@ -1,1 +1,36 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"hydrationtracker-24641","appId":"1:499778028762:android:998ec4a1882484f42091e3","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"hydrationtracker-24641","configurations":{"android":"1:499778028762:android:998ec4a1882484f42091e3","ios":"1:499778028762:ios:add15a837a96cefc2091e3","macos":"1:499778028762:ios:add15a837a96cefc2091e3","web":"1:499778028762:web:7b355dc858172c2d2091e3","windows":"1:499778028762:web:fbdc3416858481ce2091e3"}}}}}}
+{
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "predeploy": ["npm --prefix \"$RESOURCE_DIR\" run build"]
+    }
+  ],
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "hydrationtracker-24641",
+          "appId": "1:499778028762:android:998ec4a1882484f42091e3",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "hydrationtracker-24641",
+          "configurations": {
+            "android": "1:499778028762:android:998ec4a1882484f42091e3",
+            "ios": "1:499778028762:ios:add15a837a96cefc2091e3",
+            "macos": "1:499778028762:ios:add15a837a96cefc2091e3",
+            "web": "1:499778028762:web:7b355dc858172c2d2091e3",
+            "windows": "1:499778028762:web:fbdc3416858481ce2091e3"
+          }
+        }
+      }
+    }
+  }
+}
