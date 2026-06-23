@@ -1,0 +1,37 @@
+rules_version = '2';
+
+// Each user is locked to their own users/{uid} subtree.
+//
+// Raw water logs are append-only events the user can create and delete (undo).
+// Daily summaries are written exclusively by the onWaterLogWritten Cloud
+// Function (the Admin SDK bypasses these rules) and are read-only to clients —
+// enforcing the trust boundary that keeps the per-day total server-owned.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isOwner(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    match /users/{userId} {
+      allow read, write: if isOwner(userId);
+
+      // Append-only raw events: create + delete by the owner, never update.
+      match /water_logs/{logId} {
+        allow read, create, delete: if isOwner(userId);
+        allow update: if false;
+      }
+
+      // Server-owned read-model: clients read their own, never write.
+      match /daily_summaries/{dateKey} {
+        allow read: if isOwner(userId);
+        allow write: if false;
+      }
+    }
+
+    // Deny everything else by default.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
