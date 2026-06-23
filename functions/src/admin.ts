@@ -1,8 +1,9 @@
-import * as admin from "firebase-admin";
+import { initializeApp } from "firebase-admin/app";
+import { getFirestore, FieldValue } from "firebase-admin/firestore";
 
 // Initialize the Admin SDK exactly once. Importing `db` from here guarantees
 // initialization happens before any function touches Firestore.
-admin.initializeApp();
+initializeApp();
 
-export const db = admin.firestore();
-export const FieldValue = admin.firestore.FieldValue;
+export const db = getFirestore();
+export { FieldValue };
