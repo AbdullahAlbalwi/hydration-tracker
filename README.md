@@ -142,6 +142,26 @@ firebase deploy --only functions       # deploys both functions
 firebase deploy --only firestore:rules # deploys security rules
 ```
 
+### Alternative: run the backend locally (no Blaze plan)
+
+Deploying Functions needs the Blaze plan. If that isn't available, run the same
+functions/Firestore/Auth on the **Local Emulator Suite** for free — the trigger
+behaves identically, so summaries update in real time.
+
+```bash
+cd functions && npm run build && cd ..
+firebase emulators:start --only auth,firestore,functions
+
+# In another terminal — point the app at the emulators (debug-only flag):
+flutter run \
+  --dart-define=USE_FIREBASE_EMULATOR=true \
+  --dart-define=EMULATOR_HOST=10.0.2.2   # use localhost for desktop/iOS sim
+```
+
+`USE_FIREBASE_EMULATOR` is off by default, so production builds always use real
+Firebase. The Firestore emulator uses port 8085 (see `firebase.json`). Google
+sign-in needs real Firebase; against the emulator use email/password.
+
 ---
 
 ## Security
