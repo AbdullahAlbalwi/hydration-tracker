@@ -7,6 +7,9 @@ import 'package:hydration_tracker/feature/auth/data/datasources/auth_remote_data
 import 'package:hydration_tracker/feature/auth/data/repositories/auth_repository_impl.dart';
 import 'package:hydration_tracker/feature/auth/domain/repositories/auth_repository.dart';
 import 'package:hydration_tracker/feature/auth/presentation/cubit/auth_cubit.dart';
+import 'package:hydration_tracker/feature/assistant/data/chat_remote_data_source.dart';
+import 'package:hydration_tracker/feature/assistant/data/chat_repository_impl.dart';
+import 'package:hydration_tracker/feature/assistant/domain/chat_repository.dart';
 import 'package:hydration_tracker/feature/hydration/data/datasources/hydration_remote_data_source.dart';
 import 'package:hydration_tracker/feature/hydration/data/repositories/hydration_repository_impl.dart';
 import 'package:hydration_tracker/feature/hydration/domain/repositories/hydration_repository.dart';
@@ -47,4 +50,11 @@ Future<void> setupDependencies() async {
     )
     ..registerFactory<HomeCubit>(() => HomeCubit(getIt()))
     ..registerFactory<InsightsCubit>(() => InsightsCubit(getIt()));
+
+  // Assistant feature (Firebase AI Logic).
+  getIt
+    ..registerLazySingleton<ChatRemoteDataSource>(() => ChatRemoteDataSource())
+    ..registerLazySingleton<ChatRepository>(
+      () => ChatRepositoryImpl(getIt(), getIt()),
+    );
 }

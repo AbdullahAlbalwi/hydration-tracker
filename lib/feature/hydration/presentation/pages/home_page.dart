@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydration_tracker/core/date_key.dart';
 import 'package:hydration_tracker/core/di/injector.dart';
 import 'package:hydration_tracker/core/theme/app_colors.dart';
+import 'package:hydration_tracker/feature/assistant/presentation/chat_sheet.dart';
 import 'package:hydration_tracker/feature/auth/presentation/cubit/auth_cubit.dart';
 import 'package:hydration_tracker/feature/hydration/domain/entities/daily_summary.dart';
 import 'package:hydration_tracker/feature/hydration/domain/entities/water_log.dart';
@@ -34,6 +36,18 @@ class _HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
+      floatingActionButton: BlocSelector<HomeCubit, HomeState, DateTime>(
+        selector: (state) => state.selectedDate,
+        builder: (context, selectedDate) {
+          return FloatingActionButton.extended(
+            backgroundColor: AppColors.accent,
+            foregroundColor: Colors.white,
+            icon: const Icon(Icons.smart_toy_outlined),
+            label: const Text('Ask'),
+            onPressed: () => showChatSheet(context, dateKeyOf(selectedDate)),
+          );
+        },
+      ),
       appBar: AppBar(
         backgroundColor: AppColors.primary,
         centerTitle: true,
