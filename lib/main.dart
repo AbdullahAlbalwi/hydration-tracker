@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydration_tracker/core/di/injector.dart';
+import 'package:hydration_tracker/core/firebase_emulators.dart';
 import 'package:hydration_tracker/feature/auth/presentation/cubit/auth_cubit.dart';
 import 'package:hydration_tracker/feature/auth/presentation/cubit/auth_state.dart';
 import 'package:hydration_tracker/feature/auth/presentation/pages/auth_page.dart';
@@ -11,6 +12,9 @@ import 'package:hydration_tracker/firebase_options.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  if (useFirebaseEmulator) {
+    await connectFirebaseEmulators();
+  }
   await setupDependencies();
 
   runApp(const MainApp());
