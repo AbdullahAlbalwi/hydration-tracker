@@ -13,6 +13,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   if (useFirebaseEmulator) {
+    debugPrint('[HydrationTracker] Using Firebase Local Emulator Suite');
     await connectFirebaseEmulators();
   }
   await setupDependencies();
